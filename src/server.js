@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import { contactsRouter } from './routes/contacts.routes.js';
-import { notFoundHandler } from './middlewares/notFound.js';
+import  notFoundHandler  from './middlewares/notFound.js';
+import  errorHandler  from './middlewares/errorHandler.js';
 
 export const setupServer = () => {
   const app = express();
