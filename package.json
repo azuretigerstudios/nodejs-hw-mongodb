@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "start": "node ./src/index.js",
-  "dev": "nodemon --watch src --exec node ./src/index.js",
-  "lint": "eslint ."
-},
+    "start": "node ./src/index.js",
+    "dev": "nodemon --watch src --exec node ./src/index.js",
+    "lint": "eslint ."
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/azuretigerstudios/nodejs-hw-mongodb.git"
@@ -23,6 +23,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "http-errors": "^2.0.1",
     "mongoose": "^8.19.3",
     "pino": "^10.1.0",
     "pino-http": "^11.0.0"
