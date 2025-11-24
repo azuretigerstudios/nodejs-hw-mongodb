@@ -9,9 +9,9 @@ import createHttpError from 'http-errors';
 };
  */
 
-const notFoundHandler = (req, res, next) => {
+const notFound = (req, res, next) => {
   // Eğer hiçbir rota eşleşmezse, 404 hatası oluştur.
   next(createHttpError(404, 'Route not found'));
 };
 
-export default notFoundHandler;
+export default notFound;
