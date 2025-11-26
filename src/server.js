@@ -11,6 +11,13 @@ export const setupServer = () => {
   app.use(pino());
   app.use(express.json());
 
+   app.get('/', (req, res) => {
+    res.status(200).json({
+      status: 200,
+      message: 'Contacts API!',
+    });
+  });
+
   app.use('/contacts', contactsRouter);
 
   // 404
