@@ -2,7 +2,7 @@ import createHttpError from 'http-errors';
 import * as contactsService from '../services/contacts.service.js';
 /* import { createContact } from '../services/contacts.service.js';
 import { deleteContact } from '../services/contacts.service.js'; */
-import { updateContact } from '../services/contacts.service.js';
+//import { updateContact } from '../services/contacts.service.js';
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 
 export const getAllContactsController = ctrlWrapper(async (req, res) => {

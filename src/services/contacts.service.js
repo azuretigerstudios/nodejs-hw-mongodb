@@ -14,9 +14,12 @@ export const createContact = async (payload) => {
   return newContact;
 };
 
-// src/services/contacts.js
+export const updateContact = async (contactId, payload) => {
+  // Belgeyi bulur ve günceller. Güncellenmiş belgeyi döndürür.
+  const updatedContact = await Contact.findByIdAndUpdate( contactId, payload, { new: true } );
+  return updatedContact;
+} 
 
-// ... (Diğer hizmet fonksiyonları)
 
 export const deleteContact = async (contactId) => {
   // Belgeyi bulur ve siler. Silinen belgeyi döndürür (null eğer bulunamazsa).
