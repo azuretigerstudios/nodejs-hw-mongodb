@@ -1,7 +1,7 @@
 import createHttpError from 'http-errors';
 import * as contactsService from '../services/contacts.service.js';
-import { createContact } from '../services/contacts.service.js';
-import { deleteContact } from '../services/contacts.service.js';
+/* import { createContact } from '../services/contacts.service.js';
+import { deleteContact } from '../services/contacts.service.js'; */
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 
 export const getAllContactsController = async (req, res, next) => {
@@ -39,7 +39,7 @@ export const getContactByIdController = async (req, res, next) => {
 
 
 export const createContactController = ctrlWrapper(async (req, res) => {
-  const contact = await createContact(req.body);
+  const contact = await contactsService.createContact(req.body);
 
   res.status(201).json({
     status: 201,
@@ -52,7 +52,7 @@ export const createContactController = ctrlWrapper(async (req, res) => {
 
 export const deleteContactController = ctrlWrapper(async (req, res) => {
   const { contactId } = req.params;
-  const contact = await deleteContact(contactId);
+  const contact = await contactsService.createContact(req.body);
 
   // İletişim bulunamazsa 404 hatası oluşturun
   if (!contact) {
