@@ -8,10 +8,10 @@ import {
 } from '../controllers/contacts.controller.js';
 import  ctrlWrapper  from '../utils/ctrlWrapper.js';
 
-//export const contactsRouter = express.Router();
+const contactsRouter = express.Router();
 
-contactsRouter.get('/', getAllContactsController);
-contactsRouter.get('/:contactId', getContactByIdController);
+contactsRouter.get('/', ctrlWrapper(getAllContactsController));
+contactsRouter.get('/:contactId', ctrlWrapper(getContactByIdController));
 //contactsRouter.post('/', createContactController);
 contactsRouter.post('/', ctrlWrapper(createContactController));
 contactsRouter.patch('/:contactId', ctrlWrapper(updateContactController));
