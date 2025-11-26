@@ -2,28 +2,27 @@ import createHttpError from 'http-errors';
 import * as contactsService from '../services/contacts.service.js';
 /* import { createContact } from '../services/contacts.service.js';
 import { deleteContact } from '../services/contacts.service.js'; */
+import { updateContact } from '../services/contacts.service.js';
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 
-export const getAllContactsController = async (req, res, next) => {
-  try {
+export const getAllContactsController = ctrlWrapper(async (req, res) => {
+
     const contacts = await contactsService.getAllContacts();
     res.status(200).json({
       status: 200,
       message: 'Successfully found contacts!',
       data: contacts,
     });
-  } catch (error) {
-    next(error);
-  }
-};
+
+});
 
 export const getContactByIdController = async (req, res, next) => {
-  try {
+  
     const { contactId } = req.params;
     const contact = await contactsService.getContactById(contactId);
 
     if (!contact) {
-      return res.status(404).json({ message: 'Contact not found' });
+      throw createHttpError(404, 'Contact not found');
     }
 
     res.status(200).json({
@@ -31,9 +30,7 @@ export const getContactByIdController = async (req, res, next) => {
       message: `Successfully found contact with id ${contactId}!`,
       data: contact,
     });
-  } catch (error) {
-    next(error);
-  }
+  
 };
 
 
@@ -52,7 +49,7 @@ export const createContactController = ctrlWrapper(async (req, res) => {
 
 export const deleteContactController = ctrlWrapper(async (req, res) => {
   const { contactId } = req.params;
-  const contact = await contactsService.createContact(req.body);
+  const contact = await contactsService.deleteContact(contactId);
 
   // İletişim bulunamazsa 404 hatası oluşturun
   if (!contact) {
@@ -66,7 +63,7 @@ export const deleteContactController = ctrlWrapper(async (req, res) => {
 export const updateContactController = ctrlWrapper(async (req, res) => {
 
     const { contactId } = req.params;
-    const contact = await updateContact(contactId, req.body); 
+    const contact = await contactsService.updateContact(contactId, req.body); 
     if (!contact) {
       throw createHttpError(404, 'Contact not found');
     }
