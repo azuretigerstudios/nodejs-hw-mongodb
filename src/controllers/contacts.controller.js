@@ -4,16 +4,27 @@ import * as contactsService from '../services/contacts.service.js';
 import { deleteContact } from '../services/contacts.service.js'; */
 //import { updateContact } from '../services/contacts.service.js';
 import ctrlWrapper from '../utils/ctrlWrapper.js';
+import { getAllContactsSchema} from '../validation/contacts.js';
 
 export const getAllContactsController = ctrlWrapper(async (req, res) => {
 
-    const contacts = await contactsService.getAllContacts();
-    res.status(200).json({
-      status: 200,
-      message: 'Successfully found contacts!',
-      data: contacts,
-    });
+   // 1. Sorgu parametrelerini doğrula ve varsayılan değerleri al
+  const { value: query, error } = getAllContactsSchema.validate(req.query);
 
+  if (error) {
+    // Joi doğrulama hatası fırlat
+    throw createHttpError(400, `Geçersiz sorgu parametreleri: ${error.details[0].message}`);
+  }
+
+  // 2. Hizmetten tüm sorgu parametrelerini ileterek veriyi al
+  const paginationData = await contactsService.getAllContacts(query);
+
+  // 3. Yanıtı beklenen formatta gönder
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully found contacts!',
+    data: paginationData, // Hizmetten gelen tüm sayfalandırma/sıralama/filtreleme verisini içerir
+  });
 });
 
 export const getContactByIdController = async (req, res, next) => {
