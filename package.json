@@ -2,8 +2,11 @@
   "name": "nodejs-hw-mongodb",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/index.js",
+    "dev": "nodemon --watch src --exec node ./src/index.js",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -21,5 +24,18 @@
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "jsonwebtoken": "^9.0.2"
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "http-errors": "^2.0.1",
+    "joi": "^18.0.2",
+    "mongoose": "^8.19.3",
+    "pino": "^10.1.0",
+    "pino-http": "^11.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.1",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
   }
 }
