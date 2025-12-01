@@ -10,8 +10,10 @@ import  ctrlWrapper  from '../utils/ctrlWrapper.js';
 import isValidId from '../middlewares/isValidId.js';
 import validateBody from '../middlewares/validateBody.js';
 import { createContactSchema, updateContactSchema } from '../validation/contacts.js';
+import authenticate from '../middlewares/authenticate.js';
 
 const contactsRouter = express.Router();
+contactsRouter.use(authenticate); // Tüm rotalar için kimlik doğrulama orta katmanını ekle
 
 contactsRouter.get('/', ctrlWrapper(getAllContactsController));
 contactsRouter.get('/:contactId', isValidId, ctrlWrapper(getContactByIdController));
