@@ -2,6 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import pino from 'pino-http';
+import authRouter from './routes/auth.js'
 import contactsRouter from './routes/contacts.routes.js';
 import  notFound  from './middlewares/notFound.js';
 import  errorHandler  from './middlewares/errorHandler.js';
@@ -20,6 +21,7 @@ export const setupServer = () => {
     });
   });
 
+  app.use('/auth', authRouter);
   app.use('/contacts', contactsRouter);
 
   // 404
