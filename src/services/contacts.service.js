@@ -1,6 +1,6 @@
 import  {Contact}  from '../db/models/contact.model.js';
 
-export const getAllContacts = async ({ 
+export const getAllContacts = async ({ userId,
   page, 
   perPage, 
   sortBy, 
@@ -10,7 +10,7 @@ export const getAllContacts = async ({
 }) => {
   
   // Filtreleme Kriterlerini Oluşturma (Adım 5)
-  const filter = {};
+  const filter = { userId };
   
   // contactType filtresi
   if (contactType) {
@@ -59,25 +59,26 @@ export const getAllContacts = async ({
   };
 };
 
-export const getContactById = async (contactId) => {
-  return await Contact.findById(contactId);
-};
+export const getContactById = async (_id, userId) => {
+    const contact = await Contact.findOne({ _id, userId }); // <-- userId filtresi
+    return contact;
+}
 
 export const createContact = async (payload) => {
   // MongoDB'de yeni bir belge oluştur
-  const newContact = await Contact.create(payload);
-  return newContact;
+  // const newContact = await Contact.create(payload);
+  // return newContact;
+  const contact = await Contact.create(payload);
+  return contact;
 };
 
-export const updateContact = async (contactId, payload) => {
-  // Belgeyi bulur ve günceller. Güncellenmiş belgeyi döndürür.
-  const updatedContact = await Contact.findByIdAndUpdate( contactId, payload, { new: true } );
-  return updatedContact;
-} 
+export const updateContact = async (_id, userId, payload) => {
+    const contact = await Contact.findOneAndUpdate({ _id, userId }, payload, { new: true }); // <-- userId filtresi
+    return contact;
+}
 
 
-export const deleteContact = async (contactId) => {
-  // Belgeyi bulur ve siler. Silinen belgeyi döndürür (null eğer bulunamazsa).
-  const deletedContact = await Contact.findOneAndDelete({ _id: contactId });
-  return deletedContact;
-};
+export const deleteContact = async (_id, userId) => {
+    const contact = await Contact.findOneAndDelete({ _id, userId }); // <-- userId filtresi
+    return contact;
+}

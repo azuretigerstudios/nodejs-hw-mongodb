@@ -47,6 +47,7 @@ export const getContactByIdController = async (req, res, next) => {
 
 
 export const createContactController = ctrlWrapper(async (req, res) => {
+  const userId = req.user._id; // Kimlik doğrulama orta katmanından kullanıcı kimliğini al
   const contact = await contactsService.createContact(req.body);
 
   res.status(201).json({
