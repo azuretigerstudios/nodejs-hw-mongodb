@@ -46,16 +46,25 @@ export const getContactByIdController = async (req, res, next) => {
 
 
 
-export const createContactController = ctrlWrapper(async (req, res) => {
-  const userId = req.user._id; // Kimlik doğrulama orta katmanından kullanıcı kimliğini al
-  const contact = await contactsService.createContact(req.body);
+export const createContactController = async (req, res) => {
+  const contactData = { ...req.body };
+
+  // Eğer dosya yüklendiyse, Cloudinary URL'sini ekle
+  if (req.file) {
+    contactData.photo = req.file.path;
+  }
+
+  const contact = await contactsService.createContact({
+    ...contactData,
+    userId: req.user._id,
+  });
 
   res.status(201).json({
     status: 201,
     message: 'Successfully created a contact!',
     data: contact,
   });
-});
+};
 
 // src/controllers/contacts.js
 
@@ -72,17 +81,27 @@ export const deleteContactController = ctrlWrapper(async (req, res) => {
   res.status(204).send();
 });
 
-export const updateContactController = ctrlWrapper(async (req, res) => {
+export const updateContactController = async (req, res) => {
+  const { contactId } = req.params;
+  const updateData = { ...req.body };
 
-    const { contactId } = req.params;
-    const contact = await contactsService.updateContact(contactId, req.body); 
-    if (!contact) {
-      throw createHttpError(404, 'Contact not found');
-    }
-    res.status(200).json({
-      status: 200,
-      message: 'Successfully updated the contact!',
-      data: contact,
-    });
-    
-    });
+  if (req.file) {
+    updateData.photo = req.file.path;
+  }
+
+  const result = await contactsService.updateContact(
+    contactId,
+    req.user._id,
+    updateData,
+  );
+
+  if (!result) {
+    throw createHttpError(404, 'Contact not found');
+  }
+
+  res.json({
+    status: 200,
+    message: 'Successfully patched a contact!',
+    data: result,
+  });
+};

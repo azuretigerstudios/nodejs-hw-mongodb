@@ -20,4 +20,19 @@ export const registerSchema = authSchema.keys({
     }),
 });
 
+export const sendResetEmailSchema = Joi.object({
+  email: Joi.string().email().required().messages({
+    'any.required': 'E-posta zorunludur.',
+  }),
+});
+
+// Yeni Şifre Belirleme Şeması
+export const resetPasswordSchema = Joi.object({
+  token: Joi.string().required(),
+  password: Joi.string().min(6).required().messages({
+    'any.required': 'Yeni şifre zorunludur.',
+    'string.min': 'Şifre en az 6 karakter olmalıdır.',
+  }),
+});
+
 export const loginSchema = authSchema;
