@@ -26,4 +26,10 @@ authRouter.post('/refresh', ctrlWrapper(refreshController));
 // Adım 6: Çıkış
 authRouter.post('/logout', ctrlWrapper(logoutController));
 
+authRouter.post(
+  '/send-reset-email', 
+  validateBody(sendResetEmailSchema), 
+  ctrlWrapper(sendResetEmailController)
+);
+
 export default authRouter;
