@@ -4,7 +4,6 @@ import bcrypt from 'bcryptjs';
 import createHttpError from 'http-errors';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
-import createHttpError from 'http-errors';
 import bcrypt from 'bcryptjs';
 import User from '../db/models/user.js';
 import Session from '../db/models/Session.js';
