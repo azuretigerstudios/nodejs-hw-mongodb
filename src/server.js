@@ -23,10 +23,12 @@ export const setupServer = () => {
 
   app.use('/contacts', contactsRouter);
 
+
+app.use('/auth', authRouter);
+
   // 404
  app.use(notFound);
 
-app.use('/auth', authRouter);
 
  app.use(errorHandler);
 
