@@ -25,6 +25,8 @@ export const setupServer = () => {
   // 404
  app.use(notFound);
 
+app.use('/auth', authRouter);
+
  app.use(errorHandler);
 
   const PORT = process.env.PORT || 3000;
