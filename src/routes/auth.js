@@ -4,12 +4,13 @@ import express from 'express';
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 import validateBody from '../middlewares/validateBody.js';
 
-import { registerSchema, loginSchema } from '../validation/auth.js';
+import { registerSchema, loginSchema, sendResetEmailSchema } from '../validation/auth.js';
 import { 
     registerController, 
     loginController, 
     refreshController, 
-    logoutController 
+    logoutController,
+    sendResetEmailController
 } from '../controllers/auth.js';
 
 const authRouter = express.Router();
@@ -25,5 +26,11 @@ authRouter.post('/refresh', ctrlWrapper(refreshController));
 
 // Adım 6: Çıkış
 authRouter.post('/logout', ctrlWrapper(logoutController));
+
+authRouter.post(
+  '/send-reset-email', 
+  validateBody(sendResetEmailSchema), 
+  ctrlWrapper(sendResetEmailController)
+);
 
 export default authRouter;

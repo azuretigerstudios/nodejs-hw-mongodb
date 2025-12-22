@@ -5,6 +5,7 @@ import pino from 'pino-http';
 import contactsRouter from './routes/contacts.routes.js';
 import  notFound  from './middlewares/notFound.js';
 import  errorHandler  from './middlewares/errorHandler.js';
+import authRouter from './routes/auth.js';
 
 export const setupServer = () => {
   const app = express();
@@ -22,8 +23,12 @@ export const setupServer = () => {
 
   app.use('/contacts', contactsRouter);
 
+
+app.use('/auth', authRouter);
+
   // 404
  app.use(notFound);
+
 
  app.use(errorHandler);
 

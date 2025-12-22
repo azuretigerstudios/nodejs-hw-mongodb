@@ -79,3 +79,11 @@ export const logoutController = ctrlWrapper(async (req, res) => {
 
     res.status(204).send(); // 204 No Content
 });
+
+export const sendResetEmailController = ctrlWrapper(async (req, res) => {
+    // Parola sıfırlama e-postası gönderme işlemi
+    res.status(200).json({
+        status: 200,
+        message: 'Reset password email sent successfully!',
+    });
+});
