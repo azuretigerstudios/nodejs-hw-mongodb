@@ -1,0 +1,59 @@
+tags:
+  - Contacts
+summary: Create a new contact
+operationId: createContact
+description: 'Yeni bir kontak oluşturur. Bu uç nokta fotoğraf yüklemeyi desteklediği için veriler "multipart/form-data" formatında gönderilmelidir.'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: 'Kontağın adı'
+            example: 'Ali Veli'
+          phoneNumber:
+            type: string
+            description: 'Telefon numarası'
+            example: '+905551112233'
+          email:
+            type: string
+            description: 'E-posta adresi'
+            example: 'ali@example.com'
+          isFavourite:
+            type: boolean
+            description: 'Favori durumu'
+            example: false
+          contactType:
+            type: string
+            enum: [work, home, personal]
+            default: 'personal'
+            example: 'work'
+          photo:
+            type: string
+            format: binary
+            description: 'Yüklenecek profil fotoğrafı (jpg, png, webp)'
+responses:
+  '201':
+    description: 'Kontak başarıyla oluşturuldu.'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'Successfully created a contact!'
+            data:
+              $ref: '../../components/schemas/contact.yaml'
+  '400':
+    description: 'Doğrulama hatası (Eksik veya yanlış formatta veri).'
+  '401':
+    description: 'Yetkilendirme hatası.'
