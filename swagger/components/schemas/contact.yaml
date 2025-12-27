@@ -1,0 +1,47 @@
+type: object
+required:
+  - name
+  - phoneNumber
+  - contactType
+  - userId
+properties:
+  _id:
+    type: string
+    description: "Kontağın benzersiz veritabanı ID'si"
+    example: "6585f5e8b1d9c2a1b8e4f1a2"
+  name:
+    type: string
+    description: "Kontağın tam adı"
+    example: "Deniz Çeliktaş"
+  phoneNumber:
+    type: string
+    description: "Telefon numarası"
+    example: "+905554443322"
+  email:
+    type: string
+    description: "E-posta adresi"
+    example: "deniz@example.com"
+  isFavourite:
+    type: boolean
+    description: "Kontağın favori olup olmadığı bilgisi"
+    example: false
+  contactType:
+    type: string
+    description: "Kontağın türü"
+    enum: [work, home, personal]
+    example: "personal"
+  photo:
+    type: string
+    nullable: true
+    description: "Fotoğraf URL bağlantısı"
+    example: "https://res.cloudinary.com/..."
+  userId:
+    type: string
+    description: "Kullanıcı ID'si"
+    example: "6585f5e8b1d9c2a1b8e4f111"
+  createdAt:
+    type: string
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time

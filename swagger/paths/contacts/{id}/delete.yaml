@@ -1,0 +1,22 @@
+tags:
+  - Contacts
+summary: Delete a contact
+operationId: deleteContact
+description: 'Belirtilen ID değerine sahip kontağı sistemden kalıcı olarak siler.'
+security:
+  - bearerAuth: []
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: 'Silinecek kontağın benzersiz ID değeri'
+    schema:
+      type: string
+      example: '6585f5e8b1d9c2a1b8e4f1a2'
+responses:
+  '204':
+    description: 'Kontak başarıyla silindi (İçerik döndürülmez).'
+  '401':
+    description: 'Yetkilendirme hatası (Token eksik veya geçersiz).'
+  '404':
+    description: 'Silinmek istenen kontak bulunamadı.'

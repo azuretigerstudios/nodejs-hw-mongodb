@@ -1,0 +1,22 @@
+# redocly.yaml
+apis:
+  contacts@v1:
+    root: ./docs/openapi.yaml
+
+extends:
+  - recommended
+
+rules:
+  no-unused-components: error
+
+# theme kelimesini sildik, içeriği direkt buraya yazdık
+# htmlTemplate: ./docs/index.html
+# theme: # Bazı sürümlerde bu hala gerekebilir, ancak uyarıya göre direkt özellikler de yazılabilir.
+#  colors:
+#    primary:
+#      main: '#32329f'
+#  generateCodeSamples:
+#    languages:
+#      - lang: curl
+#      - lang: Node.js
+#      - lang: JavaScript
